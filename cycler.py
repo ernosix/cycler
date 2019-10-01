@@ -3,15 +3,12 @@
 from tkinter import *
 from tkinter import ttk, font
 from datetime import datetime, timedelta
-#import pifacedigitalio
-
+import pifacedigitalio
+pifacedigital = pifacedigitalio.PiFaceDigital()
+pifacedigital.relays[0].turn_on()
+global pifacedigital
 
 mode = 'HEAT'
-
-# Creates a PiFace Digital object
-#pfd = pifacedigitalio.PiFaceDigital()
-# start first relay
-#pfd.relays[0].value = 1
 
 
 def quit(*args):
@@ -21,7 +18,6 @@ def quit(*args):
 def show_time():
     global mode
     global endTime
-    #global pfd
     # Get the time remaining until mode ends
     remainder = endTime - datetime.now()
 
@@ -34,13 +30,11 @@ def show_time():
         if mode == 'HEAT':
             mode = 'COOL'
             lbl.configure(foreground="blue")
-            # Turn off the first relay
-            #pfd.relays[0].value = 0
+            pifacedigital.relays[0].turn_off()
         else:
             mode = 'HEAT'
             lbl.configure(foreground="red")
-            # Turn on/set high the first relay
-            #pfd.relays[0].value = 1
+            pifacedigital.relays[0].turn_on()
         endTime = datetime.now() + timedelta(minutes=8)
 
     # Show the time left
