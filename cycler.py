@@ -3,7 +3,7 @@
 from tkinter import *
 from tkinter import ttk, font
 from datetime import datetime, timedelta
-import pifacedigitalio
+#import pifacedigitalio
 
 
 mode = 'HEAT'
@@ -14,7 +14,7 @@ mode = 'HEAT'
 #pfd.relays[0].value = 1
 
 
-def quit():
+def quit(*args):
     root.destroy()
 
 
@@ -45,7 +45,7 @@ def show_time():
 
     # Show the time left
     remainder = remainder - timedelta(microseconds=remainder.microseconds)
-    txt.set(remainder.strftime('%M : %S'))
+    txt.set(remainder)
 
     # Loop
     root.after(1000, show_time)
