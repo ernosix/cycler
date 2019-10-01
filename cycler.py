@@ -19,11 +19,10 @@ def quit():
 
 
 def show_time():
-    global remainder
     global mode
     global endTime
     #global pfd
-    # Get the time remaining until the event
+    # Get the time remaining until mode ends
     remainder = endTime - datetime.now()
 
     # If below 3:45 set text color yellow
@@ -46,9 +45,9 @@ def show_time():
 
     # Show the time left
     remainder = remainder - timedelta(microseconds=remainder.microseconds)
-    txt.set(remainder)
+    txt.set(remainder.strftime('%M : %S'))
 
-    # Trigger the countdown after 1000ms
+    # Loop
     root.after(1000, show_time)
 
 
