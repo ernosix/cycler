@@ -26,6 +26,8 @@ def show_time():
         lbl.configure(foreground="yellow")
         status.configure(foreground="yellow")
         status_txt.set("CHANGING MODE")
+    else:
+        status_txt.set(mode + "ING MODE")
 
     # At 0:00 cycle modes
     if int(remainder.total_seconds()) < 1:
@@ -44,7 +46,6 @@ def show_time():
     # Show the time left
     remainder = remainder - timedelta(microseconds=remainder.microseconds)
     txt.set(remainder)
-    status_txt.set(mode + "ING MODE")
 
     # Loop
     root.after(1000, show_time)
@@ -57,7 +58,7 @@ pifacedigital.relays[0].turn_on()
 # Use tkinter lib for showing the clock
 root = Tk()
 root.attributes("-fullscreen", True)
-root.configure(background='black')
+root.configure(background='black', cursor='none')
 root.bind("x", quit)
 root.after(1000, show_time)
 
