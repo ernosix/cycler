@@ -29,7 +29,6 @@ def show_time():
             pifacedigital.relays[0].turn_on()
         else:
             pifacedigital.relays[0].turn_off()
-
     else:
         status_txt.set(mode + "ING MODE")
 
