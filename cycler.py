@@ -6,7 +6,7 @@ import pifacedigitalio
 from datetime import datetime, timedelta
 
 minutes = 7
-seconds = 47
+seconds = 45
 
 
 def quit(*args):
@@ -22,7 +22,7 @@ def show_time():
     # Get the time remaining until mode ends
     remainder = endTime - datetime.now()
 
-    if int(remainder.total_seconds()) < 225:
+    if int(remainder.total_seconds()) < 226:
         foreground_color = "yellow"
         status_txt.set("CHANGING MODE")
         if mode == 'HEAT':
@@ -32,7 +32,6 @@ def show_time():
     else:
         status_txt.set(mode + "ING MODE")
 
-    # At 0:00 cycle modes
     if int(remainder.total_seconds()) < 1:
         if mode == 'HEAT':
             mode = 'COOL'
@@ -56,7 +55,7 @@ def show_time():
     root.after(1000, show_time)
 
 
-# Initialize PiFace, turn on relay 1
+# Initialize PiFace
 pifacedigital = pifacedigitalio.PiFaceDigital()
 
 # Use tkinter lib for showing the clock
