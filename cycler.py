@@ -43,6 +43,7 @@ def show_time():
     # Loop
     root.after(1000, show_time)
 
+
 # Initialize PiFace, turn on relay 1
 pifacedigital = pifacedigitalio.PiFaceDigital()
 pifacedigital.relays[0].turn_on()
