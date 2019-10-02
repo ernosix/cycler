@@ -68,8 +68,8 @@ root.after(1000, show_time)
 endTime = datetime.now() + timedelta(minutes=minutes, seconds=seconds)
 mode = 'HEAT'
 foreground_color = "red"
-fnt = font.Font(family='Helvetica', size=380, weight='bold')
-status_font = font.Font(family='Helvetica', size=120, weight='bold')
+fnt = font.Font(family='Helvetica', size=375, weight='bold')
+status_font = font.Font(family='Helvetica', size=110, weight='bold')
 txt = StringVar()
 status_txt = StringVar()
 lbl = ttk.Label(root, textvariable=txt, font=fnt, foreground="red", background="black")
