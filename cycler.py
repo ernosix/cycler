@@ -4,16 +4,13 @@ from tkinter import *
 from tkinter import ttk, font
 from datetime import datetime, timedelta
 import pifacedigitalio
-pifacedigital = pifacedigitalio.PiFaceDigital()
-pifacedigital.relays[0].turn_on()
-global pifacedigital
 
 mode = 'HEAT'
-
+countdown = 8
 
 def quit(*args):
+    pifacedigital.relays[0].turn_off()
     root.destroy()
-
 
 def show_time():
     global mode
@@ -35,7 +32,7 @@ def show_time():
             mode = 'HEAT'
             lbl.configure(foreground="red")
             pifacedigital.relays[0].turn_on()
-        endTime = datetime.now() + timedelta(minutes=8)
+        endTime = datetime.now() + timedelta(minutes=countdown)
 
     # Show the time left
     remainder = remainder - timedelta(microseconds=remainder.microseconds)
@@ -44,6 +41,9 @@ def show_time():
     # Loop
     root.after(1000, show_time)
 
+# Initialize PiFace, turn on relay 1
+pifacedigital = pifacedigitalio.PiFaceDigital()
+pifacedigital.relays[0].turn_on()
 
 # Use tkinter lib for showing the clock
 root = Tk()
@@ -53,7 +53,7 @@ root.bind("x", quit)
 root.after(1000, show_time)
 
 # Set the end date and time for the countdown loop (8 min)
-endTime = datetime.now() + timedelta(minutes=8)
+endTime = datetime.now() + timedelta(minutes=countdown)
 
 fnt = font.Font(family='Helvetica', size=280, weight='bold')
 txt = StringVar()
