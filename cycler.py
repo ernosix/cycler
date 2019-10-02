@@ -2,7 +2,7 @@
 
 from tkinter import *
 from tkinter import ttk, font
-#import pifacedigitalio
+import pifacedigitalio
 from datetime import datetime, timedelta
 
 minutes = 7
@@ -10,7 +10,7 @@ seconds = 47
 
 
 def quit(*args):
-#    pifacedigital.relays[0].turn_off()
+    pifacedigital.relays[0].turn_off()
     root.destroy()
 
 
@@ -34,11 +34,11 @@ def show_time():
         if mode == 'HEAT':
             mode = 'COOL'
             foreground_color = "blue"
-#            pifacedigital.relays[0].turn_off()
+            pifacedigital.relays[0].turn_off()
         else:
             mode = 'HEAT'
             foreground_color = "red"
-#            pifacedigital.relays[0].turn_on()
+            pifacedigital.relays[0].turn_on()
         endTime = datetime.now() + timedelta(minutes=minutes, seconds=seconds)
 
     # Show the time left
@@ -54,8 +54,8 @@ def show_time():
 
 
 # Initialize PiFace, turn on relay 1
-#pifacedigital = pifacedigitalio.PiFaceDigital()
-#pifacedigital.relays[0].turn_on()
+pifacedigital = pifacedigitalio.PiFaceDigital()
+pifacedigital.relays[0].turn_on()
 
 # Use tkinter lib for showing the clock
 root = Tk()
