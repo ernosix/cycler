@@ -22,10 +22,14 @@ def show_time():
     # Get the time remaining until mode ends
     remainder = endTime - datetime.now()
 
-    # If below 3:45 set text color yellow
     if int(remainder.total_seconds()) < 225:
         foreground_color = "yellow"
         status_txt.set("CHANGING MODE")
+        if mode == 'HEAT':
+            pifacedigital.relays[0].turn_on()
+        else:
+            pifacedigital.relays[0].turn_off()
+
     else:
         status_txt.set(mode + "ING MODE")
 
@@ -34,11 +38,11 @@ def show_time():
         if mode == 'HEAT':
             mode = 'COOL'
             foreground_color = "blue"
-            pifacedigital.relays[0].turn_off()
+            pifacedigital.relays[0].turn_on()
         else:
             mode = 'HEAT'
             foreground_color = "red"
-            pifacedigital.relays[0].turn_on()
+            pifacedigital.relays[0].turn_off()
         endTime = datetime.now() + timedelta(minutes=minutes, seconds=seconds)
 
     # Show the time left
@@ -55,7 +59,6 @@ def show_time():
 
 # Initialize PiFace, turn on relay 1
 pifacedigital = pifacedigitalio.PiFaceDigital()
-pifacedigital.relays[0].turn_on()
 
 # Use tkinter lib for showing the clock
 root = Tk()
