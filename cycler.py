@@ -8,9 +8,11 @@ import pifacedigitalio
 mode = 'HEAT'
 countdown = 8
 
+
 def quit(*args):
     pifacedigital.relays[0].turn_off()
     root.destroy()
+
 
 def show_time():
     global mode
