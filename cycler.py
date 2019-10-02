@@ -18,13 +18,14 @@ def quit(*args):
 def show_time():
     global mode
     global endTime
+    global foreground_color
+
     # Get the time remaining until mode ends
     remainder = endTime - datetime.now()
 
     # If below 3:45 set text color yellow
     if int(remainder.total_seconds()) < 225:
-        lbl.configure(foreground="yellow")
-        status.configure(foreground="yellow")
+        foreground_color = "yellow"
         status_txt.set("CHANGING MODE")
     else:
         status_txt.set(mode + "ING MODE")
@@ -33,19 +34,19 @@ def show_time():
     if int(remainder.total_seconds()) < 1:
         if mode == 'HEAT':
             mode = 'COOL'
-            lbl.configure(foreground="blue")
-            status.configure(foreground="blue")
+            foreground_color = "blue"
             pifacedigital.relays[0].turn_off()
         else:
             mode = 'HEAT'
-            lbl.configure(foreground="red")
-            status.configure(foreground="red")
+            foreground_color = "red"
             pifacedigital.relays[0].turn_on()
         endTime = datetime.now() + timedelta(minutes=minutes, seconds=seconds)
 
     # Show the time left
     remainder = remainder - timedelta(microseconds=remainder.microseconds)
     txt.set(remainder)
+    status.configure(foreground=foreground_color)
+    lbl.configure(foreground=foreground_color)
 
     # Loop
     root.after(1000, show_time)
@@ -65,6 +66,7 @@ root.after(1000, show_time)
 # Set the end date and time for the countdown loop
 endTime = datetime.now() + timedelta(minutes=minutes, seconds=seconds)
 
+foreground_color = "red"
 fnt = font.Font(family='Helvetica', size=280, weight='bold')
 status_font = font.Font(family='Helvetica', size=120, weight='bold')
 txt = StringVar()
